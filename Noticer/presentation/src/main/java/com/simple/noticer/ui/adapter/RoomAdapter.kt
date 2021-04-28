@@ -1,12 +1,8 @@
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.simple.noticer.R
-import com.simple.noticer.data.model.RoomData
+import com.simple.data.model.RoomData
 import com.simple.noticer.databinding.ItemRoomBinding
 
 

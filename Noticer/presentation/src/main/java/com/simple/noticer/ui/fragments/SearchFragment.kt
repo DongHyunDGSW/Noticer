@@ -10,15 +10,12 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.simple.noticer.R
-import com.simple.noticer.data.model.RoomData
+import com.simple.data.model.RoomData
 import com.simple.noticer.data.module.FirebaseDataBaseModule
-import com.simple.noticer.data.module.UIModule
 import com.simple.noticer.databinding.FragmentSearchBinding
-import com.simple.noticer.ui.adapter.listener.onClickItemListener
 import com.simple.noticer.viewmodel.MainViewModel
 import kotlinx.coroutines.*
 

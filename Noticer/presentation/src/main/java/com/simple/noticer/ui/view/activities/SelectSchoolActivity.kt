@@ -9,9 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.simple.noticer.R
-import com.simple.noticer.data.model.ResSchoolParseData
-import com.simple.noticer.data.model.Row
-import com.simple.noticer.data.module.ParseSchoolModule
+import com.simple.data.model.ResSchoolParseData
+import com.simple.data.model.Row
 import com.simple.noticer.data.module.UIModule
 import com.simple.noticer.data.net.Network
 import com.simple.noticer.data.net.RetrofitModule

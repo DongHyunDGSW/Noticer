@@ -4,7 +4,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.simple.noticer.data.model.RoomData
+import com.simple.data.model.RoomData
 import kotlinx.coroutines.*
 
 class FirebaseDataBaseModule {

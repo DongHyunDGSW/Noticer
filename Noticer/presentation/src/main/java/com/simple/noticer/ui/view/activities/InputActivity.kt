@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.simple.noticer.R
-import com.simple.noticer.data.model.UserData
+import com.simple.data.model.UserData
 import com.simple.noticer.data.module.FirebaseAuthModule.Companion.currentUser
 import com.simple.noticer.data.module.UIModule
 import com.simple.noticer.databinding.ActivityInputBinding

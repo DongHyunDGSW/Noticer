@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.simple.noticer.R
-import com.simple.noticer.data.model.ResSchoolParseData
-import com.simple.noticer.data.model.Row
-import com.simple.noticer.data.model.SchoolInfo
+import com.simple.data.model.Row
 import com.simple.noticer.ui.adapter.listener.onSchoolItemListener
 
 class SchoolAdapter(val schoolData : ArrayList<Row>, val listener : onSchoolItemListener) : RecyclerView.Adapter<SchoolViewHolder>(){

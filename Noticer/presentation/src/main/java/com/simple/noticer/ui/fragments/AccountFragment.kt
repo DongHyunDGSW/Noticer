@@ -11,8 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.simple.noticer.R
-import com.simple.noticer.data.model.UserData
+import com.simple.data.model.UserData
 import com.simple.noticer.databinding.FragmentAccountBinding
 
 

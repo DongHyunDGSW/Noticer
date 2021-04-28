@@ -1,9 +1,7 @@
 package com.simple.noticer.data.net
 
-import com.simple.noticer.data.model.ResSchoolParseData
-import com.simple.noticer.data.module.ParseSchoolModule
+import com.simple.data.model.ResSchoolParseData
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Query
 

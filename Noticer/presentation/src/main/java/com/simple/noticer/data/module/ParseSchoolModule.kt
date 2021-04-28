@@ -1,15 +1,13 @@
 package com.simple.noticer.data.module
 
 import android.util.Log
-import com.simple.noticer.data.model.ResSchoolParseData
-import com.simple.noticer.data.model.RoomData
+import com.simple.data.model.ResSchoolParseData
 import com.simple.noticer.data.net.Network
 import com.simple.noticer.data.net.RetrofitModule
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.URL
 
 class ParseSchoolModule {
     companion object {

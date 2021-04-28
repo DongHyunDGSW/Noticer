@@ -5,17 +5,11 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.simple.noticer.R
-import com.simple.noticer.data.model.UserData
 import com.simple.noticer.data.module.FirebaseAuthModule
 import com.simple.noticer.data.module.UIModule
 import com.simple.noticer.databinding.ActivityLoginBinding
-import com.simple.noticer.ui.fragments.SearchFragment
 
 class LoginActivity : AppCompatActivity() {
 
