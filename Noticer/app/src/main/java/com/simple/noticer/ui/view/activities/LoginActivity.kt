@@ -53,10 +53,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun loginTaskDone(user : FirebaseUser?) {
         finish()
-        startActivity(Intent(this, SelectSchoolActivity::class.java))
-        overridePendingTransition(R.anim.slowly_visible, 0)
         Log.d("TAG", "${user?.email}")
-
     }
 
     override fun onBackPressed() {

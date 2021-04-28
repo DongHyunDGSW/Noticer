@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticer">
-        <activity android:name=".ui.view.activities.RegisterActivity"></activity>
+        <activity android:name=".ui.view.activities.CreateRoomActivity"></activity>
+        <activity android:name=".ui.view.activities.SelectActivity" />
+        <activity android:name=".ui.view.activities.RegisterActivity" />
         <activity android:name=".ui.view.activities.InputActivity" />
         <activity android:name=".ui.view.activities.SelectSchoolActivity" />
         <activity android:name=".ui.view.activities.LoginActivity" />

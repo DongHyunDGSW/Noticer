@@ -16,4 +16,4 @@ data class SchoolInfo(var head : ArrayList<Head>, var row : ArrayList<Row>)
 data class ResSchoolParseData(var schoolInfo : ArrayList<SchoolInfo> ?= ArrayList(), var RESULT: Result?)
 
 
-data class UserData(var userUid : String?, var profile : String?, var name : String?, var schoolName : String?, var classNum : String?)
+data class UserData(var userUid : String?= null, var profile : String?= null, var name : String?= null, var schoolName : String?= null, var classNum : String?= null, var registeredRoomList : ArrayList<RoomData> ?= null)

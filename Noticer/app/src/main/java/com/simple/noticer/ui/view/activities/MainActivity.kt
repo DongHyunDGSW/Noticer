@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.simple.noticer.R
@@ -14,9 +17,10 @@ import com.simple.noticer.data.module.UIModule
 import com.simple.noticer.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding : ActivityMainBinding
+    private val appBarConfiguration : AppBarConfiguration by lazy { AppBarConfiguration(setOf(R.id.page_home, R.id.page_search, R.id.page_account)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +29,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(mainBinding.root)
 
         startActivity(Intent(this, IntroActivity::class.java))
+
+        mainBinding.mainBottomNavi.setupWithNavController(findNavController(R.id.fragmentMain))
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.page_home -> {
-               // Navigation.findNavController(this@MainActivity, R.id.fragmentMain).navigate(R.id.action_searchFragment_to_mainFragment)
-            }
-            R.id.page_search -> {
-              //  Navigation.findNavController(this@MainActivity, R.id.fragmentMain).navigate(R.id.action_searchFragment_to_mainFragment)
-            }
+    override fun onBackPressed() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setMessage("Noticer를 종료하시겠습니까?")
+            .setPositiveButton("네") { di , i -> finish() }
+            .setNegativeButton("아니오") {di, i ->}
+            .setCancelable(false)
+            .create()
 
-        }
-        return false
+        alertDialog.show()
     }
 }

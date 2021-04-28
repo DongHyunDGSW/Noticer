@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/searchFragment3">
+    app:startDestination="@id/page_search">
     <fragment
-        android:id="@+id/searchFragment3"
-        android:name="com.simple.noticer.ui.fragments.SearchFragment"
-        android:label="SearchFragment" />
+        android:id="@+id/page_search"
+        android:name="com.simple.noticer.ui.fragments.SearchFragment" />
+    <fragment
+        android:id="@+id/page_home"
+        android:name="com.simple.noticer.ui.fragments.MainFragment"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/page_account"
+        android:name="com.simple.noticer.ui.fragments.AccountFragment"
+        tools:layout="@layout/fragment_account" />
 </navigation>

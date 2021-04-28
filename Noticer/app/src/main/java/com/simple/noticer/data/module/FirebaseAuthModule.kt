@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
 import com.simple.noticer.ui.fragments.SearchFragment
 import com.simple.noticer.ui.view.activities.LoginActivity
+import com.simple.noticer.ui.view.activities.RegisterActivity
 import java.util.*
 
 class FirebaseAuthModule {
@@ -70,21 +71,19 @@ class FirebaseAuthModule {
                  }
               }
 
-        fun registerWithEmail(email : String, password: String, context: LoginActivity) {
+        fun registerWithEmail(email : String, password: String, context: RegisterActivity) {
             if(email.isEmpty() || password.isEmpty()) {
                 Snackbar.make(context.window.decorView.rootView , "아이디나 비밀번호에 입력이 돠지 않은 부분이 있습니다.", Snackbar.LENGTH_LONG).show()
             }else {
-                auth.signInWithEmailAndPassword(email, password)
+                auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(context) { task ->
                             if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
                                 Log.d("TAG", "createUserWithEmail:success")
                                 user = auth.currentUser
                                 Snackbar.make(context.window.decorView.rootView , "회원가입 성공!", Snackbar.LENGTH_LONG).show()
-                                context.loginTaskDone(user)
+                                context.registerTaskDone(user)
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("TAG", "createUserWithEmail:failure", task.exception)
+                                Log.w("TAG", "createUserWithEmail:failure " + task.exception)
                                 Snackbar.make(context.window.decorView.rootView , "회원가입에 실패했습니다..", Snackbar.LENGTH_LONG).show()
                             }
                         }

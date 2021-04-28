@@ -88,8 +88,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-    //card implementation
+    //circle imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //card implementation
     implementation 'link.fls:swipestack:0.3.0'
 
 

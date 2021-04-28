@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.telecom.Call
+import com.google.firebase.auth.FirebaseAuth
 import com.simple.noticer.R
 import com.simple.noticer.data.module.UIModule
 import kotlinx.coroutines.GlobalScope
@@ -21,8 +22,10 @@ class IntroActivity : AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
             finish()
-            startActivity(Intent(this, LoginActivity::class.java))
-            overridePendingTransition(R.anim.slowly_visible, 0)
+            if(FirebaseAuth.getInstance().currentUser == null) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                overridePendingTransition(R.anim.slowly_visible, 0)
+            }
         }, 2500)
     }
 

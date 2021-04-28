@@ -139,10 +139,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginEmail"
+            android:id="@+id/registerEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="아이디" />
+            android:hint="이메일"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -158,10 +159,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginPassword"
+            android:id="@+id/registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호" />
+            android:hint="비밀번호"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

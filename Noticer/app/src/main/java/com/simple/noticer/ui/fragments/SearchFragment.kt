@@ -28,7 +28,11 @@ class SearchFragment: Fragment() {
     private lateinit var searchBinding : FragmentSearchBinding
     private lateinit var roomAdapter : RoomAdapter
     private lateinit var viewModel : MainViewModel
+    val jobCompleted = FirebaseDataBaseModule.jobGetRoom
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         searchBinding = FragmentSearchBinding.inflate(layoutInflater)
@@ -38,22 +42,9 @@ class SearchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = MainViewModel(requireActivity().application)
-
-
-        GlobalScope.launch {
-            initLayout()
-            delay(3500)
-
-            getJobComplete()
-
-            delay(1500)
-
-            withContext(Dispatchers.Main) {
-                initRecyclerView()
-            }
-        }
-
         super.onViewCreated(view, savedInstanceState)
+
+        initModel()
     }
 
     private fun initLayout() {
@@ -68,7 +59,7 @@ class SearchFragment: Fragment() {
         searchBinding.swipeLayout.setOnRefreshListener {
             searchBinding.swipeLayout.isRefreshing = false
             GlobalScope.launch {
-                getJobCompleteRefresh()
+                getJobComplete(REFRESH)
             }
         }
     }
@@ -87,57 +78,49 @@ class SearchFragment: Fragment() {
     }
 
     private suspend fun getJobComplete(CODE : Int? = INITIALIZE) {
-        val jobCompleted = FirebaseDataBaseModule.jobGetRoom
         val jobCompletedList = jobCompleted.await()
-
-        withContext(Dispatchers.Main) {
-            UIModule.setStatusBarTransparent(requireActivity().window, requireActivity(), UIModule.CODE_LOAD)
-            searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_visible))
-            searchBinding.loadingView.visibility = View.VISIBLE
-        }
-
-        delay(2000)
 
         if(jobCompleted.isCompleted) {
             withContext(Dispatchers.Main) {
-                UIModule.setStatusBarTransparent(requireActivity().window, requireActivity(), UIModule.CODE_MAIN)
-                searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_gone))
-                searchBinding.loadingView.visibility = View.GONE
 
                 if(CODE == INITIALIZE)
                     viewModel.roomDataLiveList.value = jobCompletedList
-                else{
 
-                }
             }
         }
         Log.d("TAG_", "inCage : ${jobCompleted.isActive} , ${jobCompleted.isCompleted} , ${jobCompleted.isCancelled}")
     }
 
+    private fun initModel() {
 
-    private suspend fun getJobCompleteRefresh(CODE : Int? = REFRESH) {
-        val jobCompleted = FirebaseDataBaseModule.jobGetRoom
-        val jobCompletedList = jobCompleted.await()
+        searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_visible))
+        searchBinding.loadingView.visibility = View.VISIBLE
+        GlobalScope.launch {
+            initLayout()
 
-        withContext(Dispatchers.Main) {
-            UIModule.setStatusBarTransparent(requireActivity().window, requireActivity(), UIModule.CODE_LOAD)
-            searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_visible))
-            searchBinding.loadingView.visibility = View.VISIBLE
-        }
+            getJobComplete()
 
-        delay(2000)
-
-        if(jobCompleted.isCompleted) {
             withContext(Dispatchers.Main) {
-                UIModule.setStatusBarTransparent(requireActivity().window, requireActivity(), UIModule.CODE_MAIN)
-                searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_gone))
-                searchBinding.loadingView.visibility = View.GONE
-
-                if(CODE == REFRESH)
-                    viewModel.roomDataLiveList.value = jobCompletedList
+                initRecyclerView()
             }
         }
-        Log.d("TAG_", "inCage : ${jobCompleted.isActive} , ${jobCompleted.isCompleted} , ${jobCompleted.isCancelled}")
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        GlobalScope.launch {
+            getJobComplete(REFRESH)
+        }
+
+        searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_gone))
+        searchBinding.loadingView.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        jobCompleted.cancel()
     }
 
     fun updateUI(user : FirebaseUser?) {

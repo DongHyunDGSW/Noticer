@@ -197,7 +197,9 @@
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="아이디" />
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -216,7 +218,9 @@
             android:id="@+id/loginPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호" />
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

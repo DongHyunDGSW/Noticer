@@ -42,4 +42,8 @@ class FirebaseDataBaseModule {
                 dataRoomList
             }
         }
+
+        fun createRoom(roomData : RoomData) {
+            FirebaseDatabase.getInstance().reference.child("roomData").push().setValue(roomData)
+        }
 }
