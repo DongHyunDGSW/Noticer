@@ -94,5 +94,13 @@ dependencies {
     //card implementation
     implementation 'link.fls:swipestack:0.3.0'
 
+    //RxJava2
+    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
+    //clean architecture
+    implementation project(":data")
+    implementation project(":domain")
 }
