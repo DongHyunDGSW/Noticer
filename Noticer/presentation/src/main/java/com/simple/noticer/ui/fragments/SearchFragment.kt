@@ -22,10 +22,12 @@ import kotlinx.coroutines.*
 
 class SearchFragment: Fragment() {
 
-    private lateinit var searchBinding : FragmentSearchBinding
-    private lateinit var roomAdapter : RoomAdapter
-    private lateinit var viewModel : MainViewModel
-    val jobCompleted = FirebaseDataBaseModule.jobGetRoom
+    private lateinit var searchBinding: FragmentSearchBinding
+    private lateinit var roomAdapter: RoomAdapter
+    private val viewModel: MainViewModel by lazy { MainViewModel(requireActivity().application) }
+    private suspend fun firebaseDataBaseModule() {
+        FirebaseDataBaseModule.jobGetRoom.await()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +40,11 @@ class SearchFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = MainViewModel(requireActivity().application)
         super.onViewCreated(view, savedInstanceState)
+
+        GlobalScope.launch {
+            FirebaseDataBaseModule.getRoomList(viewModel)
+        }
 
         initModel()
     }
@@ -56,7 +61,7 @@ class SearchFragment: Fragment() {
         searchBinding.swipeLayout.setOnRefreshListener {
             searchBinding.swipeLayout.isRefreshing = false
             GlobalScope.launch {
-                getJobComplete(REFRESH)
+                firebaseDataBaseModule()
             }
         }
     }
@@ -70,23 +75,9 @@ class SearchFragment: Fragment() {
 
         viewModel.roomDataLiveList.observe(requireActivity(), Observer {
             roomAdapter.setData(it)
-            Log.d("Observed", "OBSERVED! DATA : ${it.toString()}")
         })
     }
 
-    private suspend fun getJobComplete(CODE : Int? = INITIALIZE) {
-        val jobCompletedList = jobCompleted.await()
-
-        if(jobCompleted.isCompleted) {
-            withContext(Dispatchers.Main) {
-
-                if(CODE == INITIALIZE)
-                    viewModel.roomDataLiveList.value = jobCompletedList
-
-            }
-        }
-        Log.d("TAG_", "inCage : ${jobCompleted.isActive} , ${jobCompleted.isCompleted} , ${jobCompleted.isCancelled}")
-    }
 
     private fun initModel() {
 
@@ -95,7 +86,7 @@ class SearchFragment: Fragment() {
         GlobalScope.launch {
             initLayout()
 
-            getJobComplete()
+            firebaseDataBaseModule()
 
             withContext(Dispatchers.Main) {
                 initRecyclerView()
@@ -107,7 +98,7 @@ class SearchFragment: Fragment() {
         super.onResume()
 
         GlobalScope.launch {
-            getJobComplete(REFRESH)
+            firebaseDataBaseModule()
         }
 
         searchBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slowly_gone))
@@ -116,15 +107,9 @@ class SearchFragment: Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-
-        jobCompleted.cancel()
     }
 
-    fun updateUI(user : FirebaseUser?) {
+    fun updateUI(user: FirebaseUser?) {
         Snackbar.make(requireView(), "환영합니다 ! ${user?.displayName}님 !", Snackbar.LENGTH_LONG).show()
-    }
-    companion object {
-        const val INITIALIZE = 0
-        const val REFRESH = 1
     }
 }

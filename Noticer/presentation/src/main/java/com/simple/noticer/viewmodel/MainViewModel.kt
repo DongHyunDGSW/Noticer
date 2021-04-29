@@ -8,5 +8,4 @@ import com.simple.data.model.Row
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     var roomDataLiveList = MutableLiveData<ArrayList<RoomData>>()
-    var schoolDataList = MutableLiveData<ArrayList<Row>>()
 }

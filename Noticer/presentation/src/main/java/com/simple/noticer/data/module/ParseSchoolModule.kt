@@ -2,7 +2,7 @@ package com.simple.noticer.data.module
 
 import android.util.Log
 import com.simple.data.model.ResSchoolParseData
-import com.simple.noticer.data.net.Network
+import com.simple.noticer.data.net.RetrofitApi
 import com.simple.noticer.data.net.RetrofitModule
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -17,7 +17,7 @@ class ParseSchoolModule {
 
             val getSchool : Job = GlobalScope.async {
                 val service = RetrofitModule.getInstance()
-                val api = service.create(Network::class.java)
+                val api = service.create(RetrofitApi::class.java)
 
                 api.getAllSchools(KEY).enqueue(object : Callback<ResSchoolParseData> {
                     override fun onResponse(
