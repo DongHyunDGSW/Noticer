@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.simple.noticer.R
 import com.simple.noticer.databinding.FragmentMainBinding
+import com.simple.noticer.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 

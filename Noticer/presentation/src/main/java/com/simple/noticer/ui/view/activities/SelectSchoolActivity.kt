@@ -12,8 +12,8 @@ import com.simple.noticer.R
 import com.simple.data.model.ResSchoolParseData
 import com.simple.data.model.Row
 import com.simple.noticer.data.module.UIModule
-import com.simple.noticer.data.net.RetrofitApi
-import com.simple.noticer.data.net.RetrofitModule
+import com.simple.data.net.RetrofitApi
+import com.simple.data.net.RetrofitModule
 import com.simple.noticer.databinding.ActivitySelectSchoolBinding
 import com.simple.noticer.ui.adapter.SchoolAdapter
 import com.simple.noticer.ui.adapter.listener.onSchoolItemListener

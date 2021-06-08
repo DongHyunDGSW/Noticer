@@ -1,7 +1,7 @@
 package com.simple.data.model
 
 
-data class RoomData(var roomName : String?= null, var roomLimited : Int?= null, var roomFounder : String?= null, var roomContent : ArrayList<BoardData>?= ArrayList(), var roomPassword : String?= null)
+data class RoomData(var roomName : String?= null, var roomLimited : Int?= null, var roomFounder : String?= null, var roomContent : ArrayList<BoardData>?= ArrayList(), var roomPassword : String?= null, var roomKey : String? = null)
 
 data class BoardData(var title : String?= null, var content : String?= null, var writer : String?= null)
 

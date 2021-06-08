@@ -2,11 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    viewBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.simple.noticer"
@@ -14,10 +19,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
-        viewBinding {
-            enabled = true
-        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

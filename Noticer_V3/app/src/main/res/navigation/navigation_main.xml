@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/tab_home">
+
+    <fragment
+        android:id="@+id/tab_home"
+        android:name="kr.hs.dgsw.donghyeon.noticer.view.fragments.HomeFragment"
+        android:label="Home" />
+    <fragment
+        android:id="@+id/tab_note"
+        android:name="kr.hs.dgsw.donghyeon.noticer.view.fragments.NoteFragment"
+        android:label="Note" />
+</navigation>

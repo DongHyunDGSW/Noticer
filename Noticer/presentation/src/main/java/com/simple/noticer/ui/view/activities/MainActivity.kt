@@ -20,7 +20,6 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding : ActivityMainBinding
-    private val appBarConfiguration : AppBarConfiguration by lazy { AppBarConfiguration(setOf(R.id.page_home, R.id.page_search, R.id.page_account)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,8 +2,8 @@ package com.simple.noticer.data.module
 
 import android.util.Log
 import com.simple.data.model.ResSchoolParseData
-import com.simple.noticer.data.net.RetrofitApi
-import com.simple.noticer.data.net.RetrofitModule
+import com.simple.data.net.RetrofitApi
+import com.simple.data.net.RetrofitModule
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
