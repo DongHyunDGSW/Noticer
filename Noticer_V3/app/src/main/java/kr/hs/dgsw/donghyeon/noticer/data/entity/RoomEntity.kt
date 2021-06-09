@@ -5,5 +5,7 @@ data class RoomEntity(
     val roomLimited : Int?= null,
     val roomName : String?= null,
     val isPrivate : Boolean?= false,
-    val roomPassword : String?= null
+    val roomPassword : String?= null,
+    val roomUid : String?= null,
+    val noticeList : HashMap<String, NoticeEntity>?= null
 )

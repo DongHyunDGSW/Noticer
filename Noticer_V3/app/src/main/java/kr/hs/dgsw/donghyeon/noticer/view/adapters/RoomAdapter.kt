@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.dgsw.donghyeon.noticer.data.entity.RoomEntity
+import kr.hs.dgsw.donghyeon.noticer.data.entity.UserInfoEntity
 import kr.hs.dgsw.donghyeon.noticer.databinding.ItemRoomBinding
+import kr.hs.dgsw.donghyeon.noticer.view.adapters.listener.OnItemClickListener
 
-class RoomAdapter(private val roomDataList : ArrayList<RoomEntity> = arrayListOf()) : RecyclerView.Adapter<RoomViewHolder>() {
+class RoomAdapter(val onClicked : OnItemClickListener, private val roomDataList : ArrayList<RoomEntity> = arrayListOf()) : RecyclerView.Adapter<RoomViewHolder>() {
 
     fun setData(roomDataList: ArrayList<RoomEntity>) {
         this.roomDataList.run {
@@ -22,6 +24,9 @@ class RoomAdapter(private val roomDataList : ArrayList<RoomEntity> = arrayListOf
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         holder.bind(roomDataList[position])
+        holder.itemView.setOnClickListener {
+            onClicked.onClicked(UserInfoEntity("","", arrayListOf()), roomDataList[position])
+        }
     }
 
     override fun getItemCount(): Int = roomDataList.size

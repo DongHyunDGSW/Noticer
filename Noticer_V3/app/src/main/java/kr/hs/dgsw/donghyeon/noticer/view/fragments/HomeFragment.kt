@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import kr.hs.dgsw.donghyeon.noticer.R
 import kr.hs.dgsw.donghyeon.noticer.base.BaseFragment
 import kr.hs.dgsw.donghyeon.noticer.databinding.FragmentHomeBinding
@@ -21,13 +22,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         get() = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
     override fun onCreatedView(view: FragmentHomeBinding) {
-        requireActivity().startActivity(Intent(requireActivity(), LoginActivity::class.java))
-
         with(viewModel) {
             view.swipeLayout.setOnRefreshListener {
                 roomDataList.value?.clear()
                 refreshData()
             }
+
+            actionRVClick.observe(requireActivity(), Observer { onClicked ->
+                if(onClicked) {
+                    findNavController().navigate(HomeFragmentDirections.actionToRoom(roomDataInfo.value?.roomName, roomDataInfo.value?.roomUid))
+                    actionRVClick.value = false
+                }
+            })
         }
     }
 }
