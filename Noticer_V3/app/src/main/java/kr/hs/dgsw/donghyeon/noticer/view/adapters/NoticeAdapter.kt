@@ -9,7 +9,7 @@ import kr.hs.dgsw.donghyeon.noticer.data.entity.RoomEntity
 import kr.hs.dgsw.donghyeon.noticer.databinding.ItemNoticeBinding
 import kr.hs.dgsw.donghyeon.noticer.view.adapters.listener.OnNoticeClickListener
 
-class NoticeAdapter(val onClicked : OnNoticeClickListener, val noticeDataList : ArrayList<NoticeEntity> = arrayListOf()) : RecyclerView.Adapter<NoticeViewHolder>() {
+class NoticeAdapter(val onClicked : OnNoticeClickListener, private val noticeDataList : ArrayList<NoticeEntity> = arrayListOf()) : RecyclerView.Adapter<NoticeViewHolder>() {
 
     fun setData(noticeDataList: ArrayList<NoticeEntity>) {
         this.noticeDataList.run {
@@ -19,8 +19,8 @@ class NoticeAdapter(val onClicked : OnNoticeClickListener, val noticeDataList : 
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder =
-                        NoticeViewHolder(ItemNoticeBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder
+         = NoticeViewHolder(ItemNoticeBinding.inflate(LayoutInflater.from(parent.context)))
 
     override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
         holder.bind(noticeDataList[position])

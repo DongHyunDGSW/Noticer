@@ -1,5 +1,6 @@
 package kr.hs.dgsw.donghyeon.noticer.view.activites
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,5 +19,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         get() = ViewModelProvider(this)[MainViewModel::class.java]
 
     override fun onCreatedView(view: ActivityMainBinding) {
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }

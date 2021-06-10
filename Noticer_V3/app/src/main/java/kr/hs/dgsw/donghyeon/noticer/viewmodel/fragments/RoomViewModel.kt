@@ -41,10 +41,10 @@ class RoomViewModel : BaseViewModel() {
         return ref.child("roomData").child(roomUid).child("noticeList").childEvents()
             .ofType(ChildAddEvent::class.java)
             .doOnSubscribe {
-                Log.d("TAG", "onComplete")
                 hasCompleted.value = true
-            }.subscribe({
-                val data = it.dataSnapshot().getValue(NoticeEntity::class.java)
+                Log.d("TAG", "Completed")
+            }.subscribe({ response ->
+                val data = response.dataSnapshot().getValue(NoticeEntity::class.java)
 
                 val dataNotice = NoticeEntity(
                     data!!.title,
@@ -55,8 +55,8 @@ class RoomViewModel : BaseViewModel() {
                 )
 
                 noticeDataList.value?.add(dataNotice)
+                Log.d("TAG", "${noticeDataList.value!!}")
                 noticeItemAdapter.setData(noticeDataList.value!!)
-                Log.d("TAG", "${noticeDataList.value}")
             }) { Log.d("TAG", "${it.message}") }
     }
 }

@@ -53,8 +53,8 @@ class HomeViewModel : BaseViewModel() {
             .doOnSubscribe {
                 Log.d("TAG", "onComplete")
                 hasCompleted.value = true
-            }.subscribe({
-                val data = it.dataSnapshot().getValue(RoomEntity::class.java)
+            }.subscribe({ response ->
+                val data = response.dataSnapshot().getValue(RoomEntity::class.java)
 
                 val dataRoom = RoomEntity(
                     data!!.roomFounder,
@@ -69,19 +69,5 @@ class HomeViewModel : BaseViewModel() {
                 roomDataList.value?.add(dataRoom)
                 itemAdapter.setData(roomDataList.value!!)
             }) { Log.d("TAG", "${it.message}") }
-    }
-    
-    private fun addRoomDataList() {
-        for(i in 0 until 10) {
-            val r = ref.child("roomData").push()
-            r.setValue(RoomEntity("$i 선생님",10,"${i}번째 ",false,"", r.key, hashMapOf()))
-            sampleNoticeList(r.key!!)
-        }
-    }
-
-    private fun sampleNoticeList(key : String) {
-        for(i in 0 until 21) {
-            ref.child("roomData").child(key).child("noticeList").push().setValue(NoticeEntity("$i 제목","$i 번째 글입니다.", "$i 번째 선생님", "", arrayListOf()))
-        }
     }
 }

@@ -1,14 +1,17 @@
 package kr.hs.dgsw.donghyeon.noticer.view.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.hs.dgsw.donghyeon.noticer.R
 import kr.hs.dgsw.donghyeon.noticer.base.BaseFragment
 import kr.hs.dgsw.donghyeon.noticer.databinding.FragmentSelectSchoolBinding
@@ -25,9 +28,25 @@ class SelectSchoolFragment : BaseFragment<FragmentSelectSchoolBinding, SelectSch
         val navArgs : SelectSchoolFragmentArgs by navArgs()
 
         with(viewModel) {
+            view.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    getSchools(query!!)
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean = false
+            })
+
             actionToInfoInput.observe(requireActivity(), Observer { isCompleted ->
                 if(isCompleted) {
-                    findNavController().navigate(SelectSchoolFragmentDirections.actionToInputInfo(navArgs.email, navArgs.password))
+                    AlertDialog.Builder(requireActivity())
+                        .setTitle("재차 확인")
+                        .setMessage("${selectedData.value!!.SCHUL_NM}가 맞나요?")
+                        .setPositiveButton("네") { a, b ->
+                            findNavController().navigate(R.id.action_toInputInfo)
+                        }.setNegativeButton("아니오") { a, b -> }
+                        .create()
+                        .show()
                 }
             })
         }

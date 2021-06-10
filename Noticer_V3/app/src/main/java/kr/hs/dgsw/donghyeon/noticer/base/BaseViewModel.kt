@@ -20,6 +20,11 @@ open class BaseViewModel : ViewModel(){
         compositeDisposable.add(disposable)
     }
 
+    fun addDisposable(single: Single<*>, observer: DisposableSingleObserver<*>) {
+        compositeDisposable.add(single.subscribeOn(Schedulers.io()).
+        observeOn(AndroidSchedulers.mainThread()).subscribeWith(observer as SingleObserver<Any>) as Disposable)
+    }
+
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()

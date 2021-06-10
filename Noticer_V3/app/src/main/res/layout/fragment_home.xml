@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="kr.hs.dgsw.donghyeon.noticer.viewmodel.fragments.HomeViewModel" />
+
+        <variable
+            name="constants"
+            type="kr.hs.dgsw.donghyeon.noticer.base.constants.Constants" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -23,7 +27,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                bind:bindGridAdapter="@{viewModel.itemAdapter}"
+                bind:bindAdapter="@{viewModel.itemAdapter}"
+                bind:setType="@{constants.GRID}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
