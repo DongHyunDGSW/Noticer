@@ -25,7 +25,7 @@ class SelectSchoolFragment : BaseFragment<FragmentSelectSchoolBinding, SelectSch
 
     override fun onCreatedView(view: FragmentSelectSchoolBinding) {
 
-        val navArgs : SelectSchoolFragmentArgs by navArgs()
+        val info : SelectSchoolFragmentArgs by navArgs()
 
         with(viewModel) {
             view.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -43,7 +43,9 @@ class SelectSchoolFragment : BaseFragment<FragmentSelectSchoolBinding, SelectSch
                         .setTitle("재차 확인")
                         .setMessage("${selectedData.value!!.SCHUL_NM}가 맞나요?")
                         .setPositiveButton("네") { a, b ->
-                            findNavController().navigate(R.id.action_toInputInfo)
+                            findNavController().navigate(
+                                SelectSchoolFragmentDirections.actionToInputInfo(info.email, info.password, selectedData.value!!.SCHUL_NM)
+                            )
                         }.setNegativeButton("아니오") { a, b -> }
                         .create()
                         .show()

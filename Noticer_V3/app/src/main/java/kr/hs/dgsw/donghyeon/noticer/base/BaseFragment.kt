@@ -1,5 +1,6 @@
 package kr.hs.dgsw.donghyeon.noticer.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,4 +41,12 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        if(context != null)
+            super.onAttach(context)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
 }

@@ -1,16 +1,15 @@
 package kr.hs.dgsw.donghyeon.noticer.view.activites
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import kr.hs.dgsw.donghyeon.noticer.R
 import kr.hs.dgsw.donghyeon.noticer.base.BaseActivity
 import kr.hs.dgsw.donghyeon.noticer.databinding.ActivityMainBinding
 import kr.hs.dgsw.donghyeon.noticer.viewmodel.activites.MainViewModel
-import kr.hs.dgsw.donghyeon.noticer.widget.extensions.setSupportCollapsingToolbar
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val layoutRes: Int
@@ -19,6 +18,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         get() = ViewModelProvider(this)[MainViewModel::class.java]
 
     override fun onCreatedView(view: ActivityMainBinding) {
-        startActivity(Intent(this, LoginActivity::class.java))
+        view.bottomNavigationView.setupWithNavController(supportFragmentManager.findFragmentById(R.id.fragment)!!.findNavController())
+        checkCurrentUser()
+    }
+
+    private fun checkCurrentUser() {
+        if(FirebaseAuth.getInstance().currentUser == null)
+            startActivity(Intent(this, LoginActivity::class.java))
     }
 }

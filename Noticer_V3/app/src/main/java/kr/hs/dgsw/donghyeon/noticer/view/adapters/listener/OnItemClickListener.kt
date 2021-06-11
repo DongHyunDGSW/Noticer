@@ -5,5 +5,5 @@ import kr.hs.dgsw.donghyeon.noticer.data.entity.RoomEntity
 import kr.hs.dgsw.donghyeon.noticer.data.entity.UserInfoEntity
 
 interface OnItemClickListener {
-    fun onClicked(data : UserInfoEntity, roomData : RoomEntity)
+    fun onClicked(roomData : RoomEntity)
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
@@ -49,6 +50,7 @@
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@={viewModel.name}"
                 android:hint="이름" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="null 학교네요 ! \n이제 학생 정보만 입력하면 끝나요 !"
+                android:text="@={viewModel.selectedData}"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -121,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="학번 ( ex : 2312 )"
+                android:text="@={viewModel.classNum}"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,6 +135,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:text="정보 입력 완료"
+            android:onClick="@{() -> viewModel.signUp()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
@@ -143,6 +147,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/spinner_background"
+            bind:bindArrayGenderAdapter="@{viewModel.arrayAdapter}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 

@@ -25,7 +25,7 @@ class RoomAdapter(val onClicked : OnItemClickListener, private val roomDataList 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         holder.bind(roomDataList[position])
         holder.itemView.setOnClickListener {
-            onClicked.onClicked(UserInfoEntity("","", arrayListOf()), roomDataList[position])
+            onClicked.onClicked(roomDataList[position])
         }
     }
 

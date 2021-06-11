@@ -7,5 +7,6 @@ data class RoomEntity(
     val isPrivate : Boolean?= false,
     val roomPassword : String?= null,
     val roomUid : String?= null,
-    val noticeList : HashMap<String, NoticeEntity>?= null
+    val noticeList : HashMap<String, NoticeEntity>?= null,
+    val isAccepted : Boolean = false
 )

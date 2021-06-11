@@ -24,24 +24,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         get() = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
     override fun onCreatedView(view: FragmentHomeBinding) {
-        with(viewModel) {
-            view.swipeLayout.setOnRefreshListener {
-                roomDataList.value?.clear()
-                refreshData()
-            }
-
-            actionRVClick.observe(requireActivity(), Observer { onClicked ->
-                if(onClicked) {
-                    startActivityForExtra<RoomActivity>(
-                        true,
-                        "roomTitle",
-                        roomDataInfo.value?.roomName!!,
-                        "roomUid",
-                        roomDataInfo.value?.roomUid!!
-                    )
-                    actionRVClick.value = false
-                }
-            })
-        }
     }
 }

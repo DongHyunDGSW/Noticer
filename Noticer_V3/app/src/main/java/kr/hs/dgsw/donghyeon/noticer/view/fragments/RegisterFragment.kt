@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import io.reactivex.internal.operators.observable.ObservableNever
 import kr.hs.dgsw.donghyeon.noticer.R
 import kr.hs.dgsw.donghyeon.noticer.base.BaseFragment
+import kr.hs.dgsw.donghyeon.noticer.base.constants.Constants
 import kr.hs.dgsw.donghyeon.noticer.databinding.FragmentRegisterBinding
 import kr.hs.dgsw.donghyeon.noticer.viewmodel.fragments.RegisterViewModel
 
