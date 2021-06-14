@@ -7,11 +7,63 @@
         <variable
             name="viewModel"
             type="kr.hs.dgsw.donghyeon.noticer.viewmodel.fragments.HomeViewModel" />
+
+        <variable
+            name="constants"
+            type="kr.hs.dgsw.donghyeon.noticer.base.constants.Constants" />
     </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+
+      <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+          android:id="@+id/swipeLayout"
+          bind:isCompleted="@{viewModel.hasCompleted}"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".view.fragments.NoteFragment">
+
+              <TextView
+                  android:id="@+id/textView5"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="15dp"
+                  android:layout_marginTop="20dp"
+                  android:text="가입된 알림방"
+                  android:textSize="24sp"
+                  android:textStyle="bold"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <androidx.recyclerview.widget.RecyclerView
+                  android:id="@+id/recyclerView2"
+                  android:layout_width="0dp"
+                  android:layout_height="0dp"
+                  android:layout_marginTop="10dp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/textView9"
+                  bind:bindAdapter="@{viewModel.itemAdapter}"
+                  bind:setType="@{constants.GRID}" />
+
+              <TextView
+                  android:id="@+id/textView9"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="15dp"
+                  android:text="가입된 알림방만 표시됩니다!"
+                  android:textSize="16sp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -9,3 +9,4 @@ fun AppCompatActivity.setSupportCollapsingToolbar(toolbar : Toolbar, collapsingT
     setSupportActionBar(toolbar)
     collapsingToolbarLayout.title = title
 }
+

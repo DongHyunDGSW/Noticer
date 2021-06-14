@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.navArgs
 import kr.hs.dgsw.donghyeon.noticer.R
 import kr.hs.dgsw.donghyeon.noticer.base.BaseActivity
 import kr.hs.dgsw.donghyeon.noticer.data.entity.NoticeEntity
@@ -20,14 +21,22 @@ class RoomActivity : BaseActivity<ActivityRoomBinding, RoomViewModel>() {
         get() = ViewModelProvider(this)[RoomViewModel::class.java]
 
     override fun onCreatedView(view: ActivityRoomBinding) {
+
+        val roomActivityArgs : RoomActivityArgs by navArgs()
+
         with(viewModel) {
             view.swipeLayout.setOnRefreshListener {
                 noticeDataList.value?.clear()
-                refreshData(intent.getStringExtra("roomUid")!!)
+                refreshData(roomActivityArgs.roomUid!!)
             }
 
-            setSupportCollapsingToolbar(view.toolbar, view.collapsingToolbar, intent.getStringExtra("roomTitle")!!)
-            initObserveNoticeDataList(intent.getStringExtra("roomUid")!!)
+            val roomUid = roomActivityArgs.roomUid!!
+
+            setSupportCollapsingToolbar(view.toolbar, view.collapsingToolbar, roomActivityArgs.roomTitle!!)
+
+            initObserveNoticeDataList(roomUid)
+            addDisposable(initObserveUserList(roomUid))
+            initUser(roomUid)
         }
     }
 

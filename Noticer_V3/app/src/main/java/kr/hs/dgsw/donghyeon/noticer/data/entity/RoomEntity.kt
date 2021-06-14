@@ -8,5 +8,5 @@ data class RoomEntity(
     val roomPassword : String?= null,
     val roomUid : String?= null,
     val noticeList : HashMap<String, NoticeEntity>?= null,
-    val isAccepted : Boolean = false
+    val roomMember : HashMap<String, String>?= null
 )

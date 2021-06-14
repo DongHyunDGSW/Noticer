@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import kr.hs.dgsw.donghyeon.noticer.view.activites.MainActivity
 
 abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
 
@@ -39,14 +40,5 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment() {
             setVariable(BR.viewModel, viewModel)
             executePendingBindings()
         }
-    }
-
-    override fun onAttach(context: Context) {
-        if(context != null)
-            super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 }

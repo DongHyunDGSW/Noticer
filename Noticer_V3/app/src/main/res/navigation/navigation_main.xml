@@ -11,9 +11,29 @@
     <fragment
         android:id="@+id/tab_note"
         android:name="kr.hs.dgsw.donghyeon.noticer.view.fragments.NoteFragment"
-        android:label="Note" />
+        android:label="Note" >
+        <action
+            android:id="@+id/action_tab_note_to_roomActivity"
+            app:destination="@id/roomActivity" />
+        <action
+            android:id="@+id/action_roomActivity"
+            app:destination="@id/roomActivity" />
+    </fragment>
     <fragment
         android:id="@+id/tab_account"
         android:name="kr.hs.dgsw.donghyeon.noticer.view.fragments.AccountFragment"
         android:label="AccountFragment" />
+    <activity
+        android:id="@+id/roomActivity"
+        android:name="kr.hs.dgsw.donghyeon.noticer.view.activites.RoomActivity"
+        android:label="RoomActivity" >
+        <argument
+            android:name="roomTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="roomUid"
+            app:argType="string"
+            app:nullable="true" />
+    </activity>
 </navigation>

@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.androidhuman.rxfirebase2.database.ChildAddEvent
 import com.androidhuman.rxfirebase2.database.childEvents
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.disposables.Disposable
 import kr.hs.dgsw.donghyeon.noticer.base.BaseViewModel
 import kr.hs.dgsw.donghyeon.noticer.data.entity.NoticeEntity
@@ -18,6 +20,7 @@ class RoomViewModel : BaseViewModel() {
 
     val noticeDataList = MutableLiveData<ArrayList<NoticeEntity>>()
     var hasCompleted = MutableLiveData<Boolean>()
+    val checkUserList = ArrayList<String>()
 
     val noticeItemAdapter = NoticeAdapter(object : OnNoticeClickListener {
         override fun onClicked(data: NoticeEntity) {
@@ -29,12 +32,46 @@ class RoomViewModel : BaseViewModel() {
         initializeData()
     }
 
+    fun initUser(roomUid: String) {
+        var isCheckedUser = false
+        val userUid = FirebaseAuth.getInstance().currentUser!!.uid
+
+        for(i in checkUserList.indices) {
+            if(checkUserList[i] == userUid) {
+                isCheckedUser = true
+                break
+            }
+        }
+
+        if(!isCheckedUser) {
+            ref.child("roomData").child(roomUid)
+                .child("roomMember").child(userUid)
+                .setValue(userUid)
+        }
+    }
+
     private fun initializeData() {
         noticeDataList.value = arrayListOf()
     }
 
     fun refreshData(roomUid : String) {
         addDisposable(initObserveNoticeDataList(roomUid))
+        addDisposable(initObserveUserList(roomUid))
+        initUser(roomUid)
+    }
+
+    fun initObserveUserList(roomUid : String): Disposable {
+        return ref.child("roomData").child(roomUid).child("roomMember").childEvents()
+            .ofType(ChildAddEvent::class.java)
+            .doOnSubscribe {
+                hasCompleted.value = true
+                Log.d("TAG", "Completed")
+            }.subscribe({ response ->
+                val data = response.dataSnapshot().getValue(String::class.java)
+
+                checkUserList.add(data!!)
+                Log.d("TAG", "cc : $checkUserList")
+            }) { Log.d("TAG", "${it.message}") }
     }
 
     fun initObserveNoticeDataList(roomUid : String): Disposable {
