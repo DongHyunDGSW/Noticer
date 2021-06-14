@@ -21,6 +21,7 @@ class RoomViewModel : BaseViewModel() {
     val noticeDataList = MutableLiveData<ArrayList<NoticeEntity>>()
     var hasCompleted = MutableLiveData<Boolean>()
     val checkUserList = ArrayList<String>()
+    val isActive = MutableLiveData<Boolean>()
 
     val noticeItemAdapter = NoticeAdapter(object : OnNoticeClickListener {
         override fun onClicked(data: NoticeEntity) {
@@ -52,6 +53,10 @@ class RoomViewModel : BaseViewModel() {
 
     private fun initializeData() {
         noticeDataList.value = arrayListOf()
+    }
+
+    fun activeClick() {
+        isActive.value = true
     }
 
     fun refreshData(roomUid : String) {

@@ -27,15 +27,12 @@ class NoteFragment : BaseFragment<FragmentNoteBinding, NoteViewModel>() {
     override val viewModel: NoteViewModel
         get() = ViewModelProvider(requireActivity())[NoteViewModel::class.java]
 
-    override fun onCreatedView(view: FragmentNoteBinding) {
 
-        Log.d("TAG", "? : ${requireActivity()}")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onCreatedView(viewDataBinding)
+
         with(viewModel) {
-            view.swipeLayout.setOnRefreshListener {
-                roomDataList.value?.clear()
-                refreshData()
-            }
-
             actionRVClick.observe(requireActivity(), Observer { onClicked ->
                 if(onClicked) {
                     Navigation.findNavController(requireActivity().findViewById<FragmentContainerView>(R.id.fragment)).navigate(NoteFragmentDirections.actionRoomActivity(roomDataInfo.value?.roomName!!, roomDataInfo.value?.roomUid!!))
@@ -45,19 +42,19 @@ class NoteFragment : BaseFragment<FragmentNoteBinding, NoteViewModel>() {
         }
     }
 
+    override fun onCreatedView(view: FragmentNoteBinding) {
+
+        Log.d("TAG", "? : ${requireActivity()}")
+        with(viewModel) {
+            view.swipeLayout.setOnRefreshListener {
+                roomDataList.value?.clear()
+                refreshData()
+            }
+        }
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d("TAG_CONTEXT", "onAttached")
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.roomDataList.value?.clear()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResumeData()
-    }
-
 }

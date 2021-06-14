@@ -1,5 +1,6 @@
 package kr.hs.dgsw.donghyeon.noticer.view.activites
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -24,20 +25,33 @@ class RoomActivity : BaseActivity<ActivityRoomBinding, RoomViewModel>() {
 
         val roomActivityArgs : RoomActivityArgs by navArgs()
 
+        initRoomList(roomActivityArgs.roomUid!!)
+        setSupportCollapsingToolbar(view.toolbar, view.collapsingToolbar, roomActivityArgs.roomTitle!!)
+
         with(viewModel) {
             view.swipeLayout.setOnRefreshListener {
                 noticeDataList.value?.clear()
                 refreshData(roomActivityArgs.roomUid!!)
             }
 
-            val roomUid = roomActivityArgs.roomUid!!
+            isActive.observe(this@RoomActivity, Observer { active ->
+                if(active){
+                    startActivityForExtra(Intent(this@RoomActivity, WriteActivity::class.java), roomActivityArgs.roomUid!!)
+                }
+            })
+        }
+    }
 
-            setSupportCollapsingToolbar(view.toolbar, view.collapsingToolbar, roomActivityArgs.roomTitle!!)
-
+    fun initRoomList(roomUid : String) {
+        with(viewModel) {
             initObserveNoticeDataList(roomUid)
             addDisposable(initObserveUserList(roomUid))
             initUser(roomUid)
         }
     }
 
+    fun startActivityForExtra(intent : Intent, extra : String) {
+        intent.putExtra("roomUid", extra)
+        startActivity(intent)
+    }
 }

@@ -92,4 +92,7 @@ dependencies {
     // firebase-auth
     implementation 'com.androidhuman.rxfirebase2:firebase-auth-kotlin:16.1.0.0'
     implementation 'com.androidhuman.rxfirebase2:firebase-auth:16.1.0.0'
+
+    //transparent
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 }

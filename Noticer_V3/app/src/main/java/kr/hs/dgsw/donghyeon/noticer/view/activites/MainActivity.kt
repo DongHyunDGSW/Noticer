@@ -18,6 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         get() = ViewModelProvider(this)[MainViewModel::class.java]
 
     override fun onCreatedView(view: ActivityMainBinding) {
+        startActivity(Intent(this, SplashActivity::class.java))
         view.bottomNavigationView.setupWithNavController(supportFragmentManager.findFragmentById(R.id.fragment)!!.findNavController())
         checkCurrentUser()
     }

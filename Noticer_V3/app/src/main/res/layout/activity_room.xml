@@ -47,7 +47,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:fitsSystemWindows="true"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    bind:titleTextColor="@color/white" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -83,6 +84,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:clickable="true"
+            android:onClick="@{() -> viewModel.activeClick()}"
             app:backgroundTint="@color/white"
             app:layout_anchorGravity="bottom|right|end"
             android:layout_gravity="end|bottom"

@@ -33,7 +33,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginStart="15dp"
-                  android:layout_marginTop="20dp"
+                  android:layout_marginTop="45dp"
                   android:text="가입된 알림방"
                   android:textSize="24sp"
                   android:textStyle="bold"

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticer">
         <activity
+            android:name=".view.activites.WriteActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.activites.SplashActivity"
             android:exported="true" />
         <activity

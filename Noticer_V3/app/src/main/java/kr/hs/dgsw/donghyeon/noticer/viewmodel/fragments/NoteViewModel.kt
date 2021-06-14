@@ -44,35 +44,6 @@ class NoteViewModel : BaseViewModel() {
         addDisposable(initObserveRoomDataList())
     }
 
-    fun onResumeData() {
-        addDisposable(onResumeRoomDataList())
-    }
-
-    private fun onResumeRoomDataList() : Disposable {
-        return ref.child("roomData").childEvents()
-            .ofType(ChildAddEvent::class.java)
-            .doOnSubscribe {
-                Log.d("TAG", "onComplete")
-                hasCompleted.value = true
-            }.subscribe({ response ->
-                val data = response.dataSnapshot().getValue(RoomEntity::class.java)
-
-                val dataRoom = RoomEntity(
-                    data!!.roomFounder,
-                    data.roomLimited,
-                    data.roomName,
-                    data.isPrivate,
-                    data.roomPassword,
-                    data.roomUid,
-                    data.noticeList,
-                    data.roomMember
-                )
-
-                roomDataList.value?.add(dataRoom)
-                itemAdapter.setData(roomDataList.value!!)
-            }) { Log.d("TAG", "${it.message}") }
-    }
-
     private fun initObserveRoomDataList(): Disposable {
         return ref.child("roomData").childEvents()
             .ofType(ChildAddEvent::class.java)

@@ -35,7 +35,8 @@ class HomeViewModel : BaseViewModel() {
         addDisposable(initRoomUidList())
     }
 
-    fun initRoomUidList() : Disposable {
+
+    private fun initRoomUidList() : Disposable {
         return ref.child("roomData").childEvents()
             .ofType(ChildAddEvent::class.java)
             .subscribe({ response ->

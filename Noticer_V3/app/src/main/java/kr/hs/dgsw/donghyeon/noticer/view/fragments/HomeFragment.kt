@@ -24,5 +24,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         get() = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
     override fun onCreatedView(view: FragmentHomeBinding) {
+        with(viewModel) {
+
+        }
     }
 }

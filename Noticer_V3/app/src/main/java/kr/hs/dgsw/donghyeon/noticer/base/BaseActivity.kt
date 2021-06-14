@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
+import com.jaeger.library.StatusBarUtil
 import kr.hs.dgsw.donghyeon.noticer.BR
 
 abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
@@ -16,6 +17,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : ViewModel> : AppCompatAct
     abstract fun onCreatedView(view : VB)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        StatusBarUtil.setTransparent(this@BaseActivity)
         super.onCreate(savedInstanceState)
 
         performViewDataBinding()
